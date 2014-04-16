@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="subcalc.css">
+  <script src="subcalcf3.js"></script>
+  <script src="interface3.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SubCalc</title>
+  <script>
+    function toggleVisibilityByID(arg_id) {
+      if (document.getElementById(arg_id).style.display === "none") {
+        document.getElementById(arg_id).style.display = "";
+      }
+      else {
+        document.getElementById(arg_id).style.display = "none";
+      }
+    }
+    function tocidr() {
+        document.getElementById("cidrbtn").className = "btn btn-small btn-inverse";        
+        document.getElementById("classbtn").className = "btn btn-small";
+        document.getElementById("CIDR").checked = true;
+        document.getElementById("netbits").value = 0;
+        document.getElementById("netwhead").style.display = "none"
+        Update(4);
+    }    
+    function toclassful() {
+        document.getElementById("classbtn").className = "btn btn-small btn-inverse";        
+        document.getElementById("cidrbtn").className = "btn btn-small";
+        document.getElementById(GetClassObj(document.getElementById("ipaddr").value.split(".")).id).checked = true;
+        document.getElementById("netwhead").style.display = "";
+        Update(4);
+    }
+  </script>
+  </head>
+  <body>
+  <div id="jscheck"><h1 align=center>!! This App requires JavaScript !!</h1></div>
+  <div id="container">
+  <input id="netbits" value="8" type="number" hidden style="display:none" >
+  
+  <table id="calc">
+    <tr id="menu" >
+      <td id="title" rowspan="2"><h1>SubCalc</h1></td>
+      <td id="view1" rowspan="2" colspan="1" ><u><a onClick=toclassful() id="classbtn" class="btn btn-small btn-inverse" >Classful</a></u> <a onClick=tocidr() id="cidrbtn" class="btn btn-small">CIDR</a></td>
+    </tr>
+   <tr></tr>
+    <tr id="netwhead">
+      <td>
+        Network Class<br/>
+        <input name="netwClass" id="CIDR" value="cidr" type=radio style="display:none">
+        A:<input name="netwClass" id="A" value="a" type=radio checked=true OnClick="Update(4, fnetclass)" >
+        B:<input name="netwClass" id="B" value="b" type=radio OnClick="Update(4, fnetclass)" >
+        C:<input name="netwClass" id="C" value="c" type=radio OnClick="Update(4, fnetclass)" >
+      </td>
+      <td>
+        First Octet Range<br/>
+        <input id="octet" value="" type="text" readonly >
+      </td>
+    </tr>
+    <tr>
+      <td>IP Address<br/><input id="ipaddr" value="10.0.0.1" type="text" OnChange=Update(4) ></td>
+      <td>Mask Bits<br/><input id="maskbits" value="" type="number" min="0" max="30" step="1" OnChange="Update(4, fmaskbits)" ></td>
+    </tr>
+    <tr>
+      <td>Subnet Mask<br/><input id="subnetmask" value="" type="text" OnChange=Update(4) ></td>
+      <td>Wildcard Mask<br/><input id="wildcardmask" value="" type="text" readonly ></td>
+    </tr>
+    <tr>
+      <td>Subnet Address<br/><input id="subnetaddr" value="" type="text" readonly ></td>
+      <td>Broadcast Address<br/><input id="broadcastaddr" value="" type="text" readonly ></td>
+    </tr>
+    <tr>
+      <td colspan="2">Host Address Range<br/><input id="addrrange" value="" type="text" readonly ></td>
+    </tr>
+    <tr>
+      <td>Maximum Subnets<br/><input id="subs" value="" type="text" onChange="Update(4, fsubs)" ></td>
+      <td>Hosts Per Subnet<br/><input id="hosts" value="" type="text" onChange="Update(4, fhosts)" ></td>
+    </tr>
+    <tr>
+      <td>Subnet Bits<br/><input id="subbits" value="" type="number" min="0" max="30" step="1" onChange="Update(4, fsbits)" ></td>  
+      <td>Host Bits<br/><input id="hostbits" value="" type="number" min="2" max="32" step="1" onChange="Update(4, fhbits)" ></td>
+    </tr>
+    </table>
+    </div>
+    
+    <script>
+    window.onload = function () {
+      document.getElementById("jscheck").style.display = "none";
+      Update(4);
+    }
+    </script>
+  </body>
+</html>
