@@ -1,4 +1,4 @@
-subcalc
+SubCalc
 =======
 SubCalc, short for subnet calculator is a simple app I created while at Institute of Technology Carlow, Ireland.
 
