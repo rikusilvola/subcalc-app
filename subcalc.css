@@ -72,7 +72,8 @@ table {
     border-spacing: 0;
     margin-right: auto;
     margin-left: auto;
-    width: 275px;
+//    width: 275px;
+    min-width: 275px;
     max-width: 100%;
 }
 
